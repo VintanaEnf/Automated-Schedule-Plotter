@@ -112,9 +112,9 @@ public class MainInterface extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(Tab_NotesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(720, Short.MAX_VALUE))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 816, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 785, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(374, Short.MAX_VALUE))
         );
         Tab_NotesLayout.setVerticalGroup(
             Tab_NotesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -366,7 +366,12 @@ public class MainInterface extends javax.swing.JFrame {
     }//GEN-LAST:event_Menu_Files_OpenSaveActionPerformed
 
     private void Menu_New_SectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Menu_New_SectionActionPerformed
-        ActionNewSection create = new ActionNewSection(this, true);
+        ActionNewSection create = null;
+        try {
+            create = new ActionNewSection(this, true);
+        } catch (IOException ex) {
+            Logger.getLogger(MainInterface.class.getName()).log(Level.SEVERE, null, ex);
+        }
         create.setVisible(true);
     }//GEN-LAST:event_Menu_New_SectionActionPerformed
 

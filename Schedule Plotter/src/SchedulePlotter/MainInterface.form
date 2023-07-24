@@ -208,10 +208,10 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel1" min="-2" pref="296" max="-2" attributes="0"/>
-                          <Component id="jLabel2" min="-2" pref="470" max="-2" attributes="0"/>
-                          <Component id="jLabel3" alignment="0" min="-2" pref="375" max="-2" attributes="0"/>
+                          <Component id="jLabel2" alignment="0" min="-2" pref="816" max="-2" attributes="0"/>
+                          <Component id="jLabel3" alignment="0" min="-2" pref="785" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="720" max="32767" attributes="0"/>
+                      <EmptySpace pref="374" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
