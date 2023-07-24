@@ -70,12 +70,32 @@ public class DataManager {
         }
     }
     
-    public void Insert_Room(String Name, int[] SubjectAddresses){
+    public void Insert_Room(String Name, int[] SubjectAddresses) throws IOException{
         System.out.println("Section created, here is the summary ~");
         System.out.println("Name:  " + Name);
         for (int i = 0; i < SubjectAddresses.length; i++) {
             System.out.println("Subject Address #" + i + " is :" + SubjectAddresses[i]);
         }
+        
+        ///START INSERTING ROOM HERE
+        Total_Room++;
+        BufferedWriter a = new BufferedWriter(new FileWriter(Save_Room_Dir + Total_Room + ".section"));
+        a.write(""+Name);
+        
+        for (int i = 0; i < SubjectAddresses.length; i++) {
+            
+            a.write("\n"+SubjectAddresses[i]);
+            
+        }
+        
+        a.close();
+        
+        a = new BufferedWriter(new FileWriter(Save_Program_Dir+"info.maindata"));
+            
+                a.write(""+Total_Teacher);
+                a.write("\n"+Total_Room);
+                a.write("\n"+Total_Subject);
+                a.close();
     }
     
     public void Insert_Subject(String Name, String Code, int Units, int[] UnitsDivision){
@@ -155,6 +175,7 @@ public class DataManager {
         
         return subjectArray;
     }
+    
     private void Console_Print_Teacher(String[][] teacher){
         for (int i = 0; i < teacher.length; i++) {
             for (int j = 0; j < teacher[0].length; j++) {

@@ -554,7 +554,11 @@ public class ActionNewSection extends javax.swing.JDialog {
                 CurrentNumberOfItems++;
             }
         }
-        MANAGER.Insert_Room(NAME_SECTION.getText(), CollectionOfSubjectAddresses);
+        try {
+            MANAGER.Insert_Room(NAME_SECTION.getText(), CollectionOfSubjectAddresses);
+        } catch (IOException ex) {
+            Logger.getLogger(ActionNewSection.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         
         this.dispose();
