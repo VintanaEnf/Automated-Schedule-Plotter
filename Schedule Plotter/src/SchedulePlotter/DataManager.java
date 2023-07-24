@@ -71,7 +71,11 @@ public class DataManager {
     }
     
     public void Insert_Room(String Name, int[] SubjectAddresses){
-        
+        System.out.println("Section created, here is the summary ~");
+        System.out.println("Name:  " + Name);
+        for (int i = 0; i < SubjectAddresses.length; i++) {
+            System.out.println("Subject Address #" + i + " is :" + SubjectAddresses[i]);
+        }
     }
     
     public void Insert_Subject(String Name, String Code, int Units, int[] UnitsDivision){
@@ -138,7 +142,6 @@ public class DataManager {
             
             while((a = reader.readLine()) != null){
                 temporary[counter] = Integer.parseInt(a.toString());
-                System.out.println("Temporary number ctr: " + temporary[counter]);
                 counter++;
             }
             
@@ -161,6 +164,7 @@ public class DataManager {
     }
     
     public ComboBoxModel<String> Array_Subject_Code() throws IOException{
+        // RETURNS A MODEL FOR JCOMBO BOXES.
         
         Object[][] a = this.Read_Subject();
         String[] b = new String[a.length];

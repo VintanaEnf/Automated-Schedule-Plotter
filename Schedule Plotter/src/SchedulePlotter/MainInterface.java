@@ -26,7 +26,7 @@ public class MainInterface extends javax.swing.JFrame {
     public MainInterface() {
         try {
             // Set the Look and Feel to Nimbus
-            UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+            UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException
                 | UnsupportedLookAndFeelException e) {
             e.printStackTrace();
