@@ -19,6 +19,8 @@ import javax.swing.table.DefaultTableModel;
  * @author vinta
  */
 public class MainInterface extends javax.swing.JFrame {
+    
+    
 
     /**
      * Creates new form EditInterface
@@ -58,7 +60,8 @@ public class MainInterface extends javax.swing.JFrame {
         Tab_Teacher_Table = new javax.swing.JTable();
         Tab_Subjects = new javax.swing.JPanel();
         Tab_Teacher_Scroll1 = new javax.swing.JScrollPane();
-        Tab_Teacher_Table1 = new javax.swing.JTable();
+        Tab_Subject_Table = new javax.swing.JTable();
+        jPanel1 = new javax.swing.JPanel();
         Menu = new javax.swing.JMenuBar();
         Menu_Files = new javax.swing.JMenu();
         Menu_Files_Begin = new javax.swing.JMenuItem();
@@ -175,8 +178,8 @@ public class MainInterface extends javax.swing.JFrame {
 
         Tab.addTab("   Teachers   ", Tab_Teacher);
 
-        Tab_Teacher_Table1.setBorder(javax.swing.BorderFactory.createCompoundBorder());
-        Tab_Teacher_Table1.setModel(new javax.swing.table.DefaultTableModel(
+        Tab_Subject_Table.setBorder(javax.swing.BorderFactory.createCompoundBorder());
+        Tab_Subject_Table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -192,8 +195,8 @@ public class MainInterface extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        Tab_Teacher_Table1.setSelectionForeground(new java.awt.Color(0, 0, 0));
-        Tab_Teacher_Scroll1.setViewportView(Tab_Teacher_Table1);
+        Tab_Subject_Table.setSelectionForeground(new java.awt.Color(0, 0, 0));
+        Tab_Teacher_Scroll1.setViewportView(Tab_Subject_Table);
 
         javax.swing.GroupLayout Tab_SubjectsLayout = new javax.swing.GroupLayout(Tab_Subjects);
         Tab_Subjects.setLayout(Tab_SubjectsLayout);
@@ -213,6 +216,19 @@ public class MainInterface extends javax.swing.JFrame {
         );
 
         Tab.addTab("  Subjects  ", Tab_Subjects);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1196, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 681, Short.MAX_VALUE)
+        );
+
+        Tab.addTab("  Sections  ", jPanel1);
 
         Menu.setOpaque(true);
 
@@ -330,6 +346,7 @@ public class MainInterface extends javax.swing.JFrame {
         Values_Teachers = log.Read_Teacher();
         Values_Subjects = log.Read_Subject();
         Update_Table_Teacher();
+        Update_Table_Subject();
     }
     
     private void Menu_New_TeacherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Menu_New_TeacherActionPerformed
@@ -400,6 +417,30 @@ public class MainInterface extends javax.swing.JFrame {
             Logger.getLogger(MainInterface.class.getName()).log(Level.SEVERE, null, ex);
         }
         }
+    
+    private void Update_Table_Subject() throws IOException{
+            DataManager a = new DataManager();
+            
+            Object TableColumns[] = {"Full Name", "Code Name", "Units", "Division of Units"};
+            Object Subjects[][] = a.Read_Subject();
+            Object TableOnly[][] = new Object[Subjects.length][4];
+            for (int i = 0; i < Subjects.length; i++) {
+                    
+                    TableOnly[i][0] = Subjects[i][0];
+                    TableOnly[i][1] = Subjects[i][1];
+                    TableOnly[i][2] = Subjects[i][2];
+                    int[] temp = (int[]) Subjects[i][3];
+                    String holder = ""+temp[0];
+                    
+                    for (int j = 0; j < temp.length-1; j++) {
+                    holder = holder + " / " + temp[j+1];
+                    
+                }
+                    TableOnly[i][3] = holder;
+        }
+            DefaultTableModel model = new DefaultTableModel(TableOnly, TableColumns);
+            Tab_Subject_Table.setModel(model);
+    }
     /**
      * @param args the command line arguments
      */
@@ -460,14 +501,15 @@ public class MainInterface extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator Separator;
     private javax.swing.JTabbedPane Tab;
     private javax.swing.JPanel Tab_Notes;
+    private javax.swing.JTable Tab_Subject_Table;
     private javax.swing.JPanel Tab_Subjects;
     private javax.swing.JPanel Tab_Teacher;
     private javax.swing.JScrollPane Tab_Teacher_Scroll;
     private javax.swing.JScrollPane Tab_Teacher_Scroll1;
     private javax.swing.JTable Tab_Teacher_Table;
-    private javax.swing.JTable Tab_Teacher_Table1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

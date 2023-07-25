@@ -22,21 +22,20 @@ public class DataManager {
     private String Save_Subject_Dir = "Saves\\";
     public DataManager(){
         try {
-            BufferedReader reader = new BufferedReader(new FileReader(Save_Program_Dir+"info.maindata"));
-            String line;
-            Total_Teacher = Integer.valueOf(reader.readLine());
-            Total_Room = Integer.valueOf(reader.readLine());
-            Total_Subject = Integer.valueOf(reader.readLine());
-            reader.close();
+            try (BufferedReader reader = new BufferedReader(new FileReader(Save_Program_Dir+"info.maindata"))) {
+                Total_Teacher = Integer.parseInt(reader.readLine());
+                Total_Room = Integer.parseInt(reader.readLine());
+                Total_Subject = Integer.parseInt(reader.readLine());
+            }
             
             System.out.println("Successfully read the program save file.");
         } catch (FileNotFoundException ex) {
             try {
-                BufferedWriter writer = new BufferedWriter(new FileWriter(Save_Program_Dir+"info.maindata"));
-                writer.write(""+Total_Teacher);
-                writer.write("\n"+Total_Room);
-                writer.write("\n"+Total_Subject);
-                writer.close();
+                try (BufferedWriter writer = new BufferedWriter(new FileWriter(Save_Program_Dir+"info.maindata"))) {
+                    writer.write(""+Total_Teacher);
+                    writer.write("\n"+Total_Room);
+                    writer.write("\n"+Total_Subject);
+                }
                 System.out.println("No program save file yet. The save file has been successfully created.");
             } catch (IOException ex1) {
                 Logger.getLogger(DataManager.class.getName()).log(Level.SEVERE, null, ex1);
@@ -46,6 +45,13 @@ public class DataManager {
         }
         
     }
+    
+    // public void Insert_Teacher(String Name, String Priority, String Sub1, String Sub2, boolean enabled); --- Creates a file in the path with the teacher's info.
+    // public void Insert_Room(String Name, int[] SubjectAddresses); --- Creates a file in the path with the Section's infos.
+    // public void Insert_Subject(String Name, String Code, int Units, int[] UnitsDivision); --- Creates a file in the path with the Subject's infos.
+    // public Object[][] Read_Teacher();  ----------     [index of teacher][items written in the teacher file]
+    // public Object[][] Read_Subject();  ----------     [index of Subject][items written in the subject file]
+    // public ComboBoxModel<String> Array_Subject_Code(); ---------- Call this for JComboBox items consisting of Subject codes.
     
     public void Insert_Teacher(String Name, String Priority, String Sub1, String Sub2, boolean enabled){
         Total_Teacher++;
@@ -128,13 +134,13 @@ public class DataManager {
         
         for (int i = 0; i < Total_Teacher; i++) {
             
-        BufferedReader reader = new BufferedReader(new FileReader(Save_Teacher_Dir + (i+1) + ".teacher"));
-        ArrayA[i][0] = reader.readLine();
-        ArrayA[i][1] = reader.readLine();
-        ArrayA[i][2] = reader.readLine();
-        ArrayA[i][3] = reader.readLine();
-        ArrayA[i][4] = reader.readLine();
-        reader.close();
+            try (BufferedReader reader = new BufferedReader(new FileReader(Save_Teacher_Dir + (i+1) + ".teacher"))) {
+                ArrayA[i][0] = reader.readLine();
+                ArrayA[i][1] = reader.readLine();
+                ArrayA[i][2] = reader.readLine();
+                ArrayA[i][3] = reader.readLine();
+                ArrayA[i][4] = reader.readLine();
+            }
         
         
             for (int j = 0; j < 4; j++) {
@@ -176,12 +182,9 @@ public class DataManager {
         return subjectArray;
     }
     
-    private void Console_Print_Teacher(String[][] teacher){
-        for (int i = 0; i < teacher.length; i++) {
-            for (int j = 0; j < teacher[0].length; j++) {
-                System.out.println(teacher[i][j]+"");
-            }
-        }
+    public Object[][] Read_Sections(){
+        
+        return new Object[2][2];
     }
     
     public ComboBoxModel<String> Array_Subject_Code() throws IOException{
