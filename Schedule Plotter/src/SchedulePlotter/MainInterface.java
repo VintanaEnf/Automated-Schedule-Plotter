@@ -62,6 +62,8 @@ public class MainInterface extends javax.swing.JFrame {
         Tab_Teacher_Scroll1 = new javax.swing.JScrollPane();
         Tab_Subject_Table = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
+        Tab_Teacher_Scroll2 = new javax.swing.JScrollPane();
+        Tab_Subject_Table1 = new javax.swing.JTable();
         Menu = new javax.swing.JMenuBar();
         Menu_Files = new javax.swing.JMenu();
         Menu_Files_Begin = new javax.swing.JMenuItem();
@@ -217,15 +219,41 @@ public class MainInterface extends javax.swing.JFrame {
 
         Tab.addTab("  Subjects  ", Tab_Subjects);
 
+        Tab_Subject_Table1.setBorder(javax.swing.BorderFactory.createCompoundBorder());
+        Tab_Subject_Table1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Full Name", "Code Name", "Units", "Division of Units"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        Tab_Subject_Table1.setSelectionForeground(new java.awt.Color(0, 0, 0));
+        Tab_Teacher_Scroll2.setViewportView(Tab_Subject_Table1);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1196, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(0, 7, Short.MAX_VALUE)
+                .addComponent(Tab_Teacher_Scroll2, javax.swing.GroupLayout.PREFERRED_SIZE, 1182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 7, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 681, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(Tab_Teacher_Scroll2, javax.swing.GroupLayout.PREFERRED_SIZE, 651, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         Tab.addTab("  Sections  ", jPanel1);
@@ -399,6 +427,8 @@ public class MainInterface extends javax.swing.JFrame {
 
     private void Menu_Files_ForceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Menu_Files_ForceActionPerformed
         try {
+            DataManager log = new DataManager();
+            log.Read_Sections();
             UpdateValues();
         } catch (IOException ex) {
             Logger.getLogger(MainInterface.class.getName()).log(Level.SEVERE, null, ex);
@@ -502,10 +532,12 @@ public class MainInterface extends javax.swing.JFrame {
     private javax.swing.JTabbedPane Tab;
     private javax.swing.JPanel Tab_Notes;
     private javax.swing.JTable Tab_Subject_Table;
+    private javax.swing.JTable Tab_Subject_Table1;
     private javax.swing.JPanel Tab_Subjects;
     private javax.swing.JPanel Tab_Teacher;
     private javax.swing.JScrollPane Tab_Teacher_Scroll;
     private javax.swing.JScrollPane Tab_Teacher_Scroll1;
+    private javax.swing.JScrollPane Tab_Teacher_Scroll2;
     private javax.swing.JTable Tab_Teacher_Table;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

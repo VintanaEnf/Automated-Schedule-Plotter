@@ -51,6 +51,7 @@ public class DataManager {
     // public void Insert_Subject(String Name, String Code, int Units, int[] UnitsDivision); --- Creates a file in the path with the Subject's infos.
     // public Object[][] Read_Teacher();  ----------     [index of teacher][items written in the teacher file]
     // public Object[][] Read_Subject();  ----------     [index of Subject][items written in the subject file]
+    // public Object[][] Read_Section();  ----------     [index of Section][items written in the Section file]
     // public ComboBoxModel<String> Array_Subject_Code(); ---------- Call this for JComboBox items consisting of Subject codes.
     
     public void Insert_Teacher(String Name, String Priority, String Sub1, String Sub2, boolean enabled){
@@ -182,9 +183,42 @@ public class DataManager {
         return subjectArray;
     }
     
-    public Object[][] Read_Sections(){
+    public Object[][] Read_Sections() throws FileNotFoundException, IOException{
         
-        return new Object[2][2];
+        Object[][] placeHolder = new Object[Total_Room][2];
+        
+         for (int i = 0; i < Total_Room; i++) {
+             
+             
+            BufferedReader reader = new BufferedReader(new FileReader(Save_Room_Dir + (i+1) + ".section"));
+            
+            Object a;
+            Object[] temporary = new Object[20];
+            int counter = 0;
+            
+            while((a = reader.readLine()) != null){
+                temporary[counter] = a.toString();
+                counter++;
+            }
+            
+            
+            Object[] unitsDiv = new Object[counter];
+            
+            placeHolder[i][0] = temporary[0];
+            for (int j = 0; j < unitsDiv.length - 1; j++) {
+                unitsDiv[j] = temporary[j];
+            }
+            
+            placeHolder[i][1] = unitsDiv;
+            
+        }
+         
+         for (int i = 0; i < Total_Room; i++) {
+            
+             System.out.println(placeHolder[i][0]+" has subjects contained in the array address: " + placeHolder[i][1]);
+        }
+         
+        return placeHolder;
     }
     
     public ComboBoxModel<String> Array_Subject_Code() throws IOException{
